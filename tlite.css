@@ -1,20 +1,25 @@
+.tlite-container {
+  position: absolute;
+  width: 280px; /* Max-width before the tooltip wraps */
+  opacity: 0;
+  visibility: hidden;
+  text-align: center;
+  transition: opacity 0.4s;
+  z-index: 1000;
+}
+
 .tlite {
+  display: inline-block;
   background: #111;
   color: white;
   font-family: sans-serif;
   font-size: 0.8rem;
   font-weight: normal;
   text-decoration: none;
-  text-align: left;
+  text-align: center;
   padding: 0.6em 0.75rem;
   border-radius: 4px;
-  position: absolute;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s;
-  white-space: nowrap;
   box-shadow: 0 0.5rem 1rem -0.5rem black;
-  z-index: 1000;
   -webkit-backface-visibility: hidden;
 }
 
@@ -28,14 +33,22 @@
   opacity: 0.9;
 }
 
-.tlite::before {
+.tlite-container::before {
   content: ' ';
   display: block;
-  background: inherit;
+  background: #111;
   width: 10px;
   height: 10px;
   position: absolute;
   transform: rotate(45deg);
+}
+
+.tlite-w, .tlite-nw, .tlite-sw {
+  text-align: left;
+}
+
+.tlite-e, .tlite-ne, .tlite-se {
+  text-align: right;
 }
 
 .tlite-n::before {
@@ -46,12 +59,12 @@
 
 .tlite-nw::before {
   top: -3px;
-  left: 10px;
+  left: 7px;
 }
 
 .tlite-ne::before {
   top: -3px;
-  right: 10px;
+  right: 7px;
 }
 
 .tlite-s::before {
@@ -62,12 +75,12 @@
 
 .tlite-se::before {
   bottom: -3px;
-  right: 10px;
+  right: 7px;
 }
 
 .tlite-sw::before {
   bottom: -3px;
-  left: 10px;
+  left: 7px;
 }
 
 .tlite-w::before {

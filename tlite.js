@@ -59,18 +59,22 @@ tlite.show = function (el, opts, isAuto) {
   }
 
   function createTooltip(el, text, opts) {
-    var tooltipEl = document.createElement('span');
-    var grav = opts.grav || el.getAttribute('data-tlite') || 'n';
+    var tooltipEl = document.createElement('div');
+    tooltipEl.className = 'tlite-container'
 
-    tooltipEl.innerHTML = text;
+    var tooltipInner = document.createElement('span');
+    tooltipInner.className = 'tlite'
+    tooltipInner.innerHTML = text;
 
+    tooltipEl.appendChild(tooltipInner)
     el.appendChild(tooltipEl);
 
+    var grav = opts.grav || el.getAttribute('data-tlite') || 'n';
     var vertGrav = grav[0] || '';
     var horzGrav = grav[1] || '';
 
     function positionTooltip() {
-      tooltipEl.className = 'tlite ' + 'tlite-' + vertGrav + horzGrav;
+      tooltipEl.className += ' tlite-' + vertGrav + horzGrav;
 
       var arrowSize = 10;
       var top = el.offsetTop;
@@ -88,16 +92,16 @@ tlite.show = function (el, opts, isAuto) {
 
       tooltipEl.style.top = (
         vertGrav === 's' ? (top - tooltipHeight - arrowSize) :
-        vertGrav === 'n' ? (top + height + arrowSize) :
-        (top + (height / 2) - (tooltipHeight / 2))
+          vertGrav === 'n' ? (top + height + arrowSize) :
+            (top + (height / 2) - (tooltipHeight / 2))
       ) + 'px';
 
       tooltipEl.style.left = (
         horzGrav === 'w' ? left :
-        horzGrav === 'e' ? left + width - tooltipWidth :
-        vertGrav === 'w' ? (left + width + arrowSize) :
-        vertGrav === 'e' ? (left - tooltipWidth - arrowSize) :
-        (centerEl - tooltipWidth / 2)
+          horzGrav === 'e' ? left + width - tooltipWidth :
+            vertGrav === 'w' ? (left + width + arrowSize) :
+              vertGrav === 'e' ? (left - tooltipWidth - arrowSize) :
+                (centerEl - tooltipWidth / 2)
       ) + 'px';
     }
 
